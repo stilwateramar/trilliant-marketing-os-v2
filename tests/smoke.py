@@ -1,4 +1,4 @@
-"""Browser smoke test. Usage: python3 tests/smoke.py   (needs: pip install playwright; playwright install chromium)"""
+"""Browser smoke test. Usage: TDMOS_PASS=<login password> python3 tests/smoke.py   (needs: pip install playwright; playwright install chromium)"""
 import http.server, threading, functools, os, sys, json, tempfile, re
 from playwright.sync_api import sync_playwright
 
@@ -14,8 +14,9 @@ def check(name, cond, extra=""):
     print(("PASS " if cond else "FAIL ") + name + (f"  {extra}" if extra and not cond else ""))
     if not cond: fails.append(name)
 
-def new_page(b):
+def new_page(b, login=True):
     ctx = b.new_context(viewport={"width": 1300, "height": 900}); p = ctx.new_page(); errs = []
+    if login: ctx.add_init_script("sessionStorage.setItem('tdmos-auth','1')")
     p.on("console", lambda m: errs.append(m.text) if m.type == "error" and "fonts.g" not in m.text and "Failed to load resource" not in m.text else None)
     p.on("pageerror", lambda e: errs.append(str(e))); return ctx, p, errs
 
@@ -27,6 +28,19 @@ def state(p): return p.evaluate("JSON.parse(localStorage.getItem('pmo-state-v3')
 
 with sync_playwright() as pw:
     b = pw.chromium.launch()
+    # 0. login gate
+    ctx, p, errs = new_page(b, login=False); p.goto(URL); p.wait_for_timeout(600)
+    check("login shown first", p.is_visible("#login.open"))
+    p.fill("#login-user", "trilliant"); p.fill("#login-pass", "wrong"); p.click("#login-form button"); p.wait_for_timeout(400)
+    check("wrong password rejected", p.is_visible("#login.open") and "Incorrect" in p.inner_text("#login-err"))
+    p.fill("#login-pass", os.environ.get("TDMOS_PASS", "")); p.click("#login-form button"); p.wait_for_timeout(400)
+    check("correct login opens app", not p.is_visible("#login.open"))
+    p.reload(); p.wait_for_timeout(600)
+    check("login persists on reload (same tab)", not p.is_visible("#login.open"))
+    p.click('[data-action="start-demo"]'); p.wait_for_timeout(500)
+    p.click('[data-action="logout"]'); p.wait_for_timeout(300)
+    check("logout shows login again", p.is_visible("#login.open"))
+    check("login: no console errors", not errs, str(errs[:3])); ctx.close()
     # 1. demo path
     ctx, p, errs = new_page(b); p.goto(URL); p.wait_for_timeout(600)
     check("start screen shown on first visit", p.is_visible("#start.open"))

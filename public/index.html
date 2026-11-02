@@ -24,6 +24,7 @@
         <button class="btn sm primary" data-action="new-client" type="button">Add client (upload)</button>
         <button class="btn sm" data-action="clear-demo" id="btn-clear-demo" type="button">Remove demo clients</button>
         <button class="btn sm ghost" data-action="reset-all" type="button">Reset all data</button>
+        <button class="btn sm" data-action="logout" type="button">Log out</button>
       </div>
       <div class="field">
         <label for="currency">Currency</label>
@@ -52,11 +53,13 @@
     <div class="btns" id="modal-actions"></div>
   </div>
 </div>
+<div class="start login" id="login" role="dialog" aria-modal="true" aria-label="Log in"></div>
 <div class="start" id="start" role="dialog" aria-modal="true" aria-label="Get started"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 <script src="engine.js"></script>
 <script src="app.js"></script>
+<script src="login.js"></script>
 </body>
 </html>

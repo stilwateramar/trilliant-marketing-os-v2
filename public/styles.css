@@ -225,3 +225,7 @@ td input[id^="vn-"] { min-width: 150px; }
 .start-opt:hover, .start-opt:focus-visible { border-color: var(--acc, currentColor); }
 .start-opt strong { font: 650 16px var(--font-display); }
 input[type="file"] { font-size: 13px; }
+
+.start.login { z-index: 60; }
+.login-card { max-width: 380px; }
+.login-card input { font: inherit; padding: 10px 12px; border: 1px solid var(--line, #d0d5dd); border-radius: 8px; background: #fff; color: inherit; }

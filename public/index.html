@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trilliant Digital Marketing OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="rail" id="rail" aria-label="Agents">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">TD</div>
+      <div><div class="brand-name">Trilliant Digital</div><div class="brand-sub">Marketing OS</div></div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <div class="rail-foot">
+      <div class="conn" id="conn">
+        <div class="lab small" style="font-weight:600">Your data</div>
+        <p class="small muted">Stored only in this browser. Nothing is sent to a server.</p>
+        <button class="btn sm primary" data-action="new-client" type="button">Add client (upload)</button>
+        <button class="btn sm" data-action="clear-demo" id="btn-clear-demo" type="button">Remove demo clients</button>
+        <button class="btn sm ghost" data-action="reset-all" type="button">Reset all data</button>
+      </div>
+      <div class="field">
+        <label for="currency">Currency</label>
+        <select id="currency"><option value="$">$ USD</option><option value="₹">₹ INR</option><option value="€">€ EUR</option><option value="£">£ GBP</option></select>
+      </div>
+      <button class="btn sm" data-action="regen" type="button">New sample data</button>
+      <button class="btn sm" data-action="export-report" type="button">Export full report</button>
+      <p class="small muted" id="data-source"></p>
+    </div>
+  </aside>
+  <main>
+    <header class="topbar">
+      <button class="btn sm menu-btn" type="button" data-action="menu" aria-label="Open menu">Menu</button>
+      <div class="client-pick" id="client-pick"></div>
+      <h1 id="view-title">Overview</h1>
+      <div class="strip" id="strip"></div>
+    </header>
+    <div id="view" class="view"></div>
+  </main>
+</div>
+
+<div class="modal-back" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <h2 id="modal-title"></h2>
+    <div id="modal-body"></div>
+    <div class="btns" id="modal-actions"></div>
+  </div>
+</div>
+<div class="start" id="start" role="dialog" aria-modal="true" aria-label="Get started"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

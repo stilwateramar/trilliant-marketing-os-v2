@@ -1,0 +1,18 @@
+# Render Blueprint: free static site, no server and no database.
+services:
+  - type: web
+    name: trilliant-marketing-os
+    runtime: static
+    buildCommand: echo "static site, nothing to build"
+    staticPublishPath: ./public
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: no-referrer
+      - path: /*.html
+        name: Cache-Control
+        value: no-cache

@@ -1,0 +1,10 @@
+{
+  "name": "trilliant-marketing-os-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Trilliant Digital Marketing OS V2: client-side performance-marketing tool (no server, no database).",
+  "scripts": {
+    "dev": "npx --yes serve public -l 3000",
+    "test": "python3 tests/smoke.py"
+  }
+}

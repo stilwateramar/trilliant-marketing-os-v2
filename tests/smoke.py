@@ -31,7 +31,7 @@ with sync_playwright() as pw:
     # 0. login gate
     ctx, p, errs = new_page(b, login=False); p.goto(URL); p.wait_for_timeout(600)
     check("login shown first", p.is_visible("#login.open"))
-    p.fill("#login-user", "trilliant"); p.fill("#login-pass", "wrong"); p.click("#login-form button"); p.wait_for_timeout(400)
+    p.fill("#login-user", "admin"); p.fill("#login-pass", "wrong"); p.click("#login-form button"); p.wait_for_timeout(400)
     check("wrong password rejected", p.is_visible("#login.open") and "Incorrect" in p.inner_text("#login-err"))
     p.fill("#login-pass", os.environ.get("TDMOS_PASS", "")); p.click("#login-form button"); p.wait_for_timeout(400)
     check("correct login opens app", not p.is_visible("#login.open"))

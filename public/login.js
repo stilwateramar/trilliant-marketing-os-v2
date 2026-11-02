@@ -1,8 +1,8 @@
 /* Simple client-side login gate. Not real security: the hash below ships to every visitor. */
 (function () {
   "use strict";
-  var USER = "trilliant";
-  var HASH = "c97609ce61e1b5d0f2596046e2ed7a5ed0fbaa9eed3fec6e330014d77999d08d";
+  var USER = "admin";
+  var HASH = "f1b3803e39539fbadf37a49b2e400a4a22d5b104ce101b5c19fa4224c4d8d07b";
   var FLAG = "tdmos-auth";
   var box = document.getElementById("login");
   if (!box) return;
